@@ -63,4 +63,4 @@ http://127.0.0.1:5050
 
 The SQLite database is created automatically the first time the app runs.
 
-Note: TaskForge uses port `5050` because port `5000` may already be used by Apple AirPlay/Control Center on macOS.
+Note: TaskForge uses port `5050` because port `5000` may already be used by Apple AirPlay/Control Center on macOS. If you use Windows it should be just fine and work well. Thank you.
