@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div>
+        <h1 class="h2 mb-1">All Tasks</h1>
+        <p class="text-muted mb-0">Manage your development work in one place.</p>
+    </div>
+    <a href="{{ url_for('create_task') }}" class="btn btn-primary">New Task</a>
+</div>
+
+<div class="panel">
+    {% if tasks %}
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>SDLC Phase</th>
+                        <th>Due Date</th>
+                        <th>Updated</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                        <tr>
+                            <td>
+                                <strong>{{ task.title }}</strong>
+                                {% if task.description %}
+                                    <div class="text-muted small">{{ task.description[:90] }}{% if task.description|length > 90 %}...{% endif %}</div>
+                                {% endif %}
+                            </td>
+                            <td><span class="badge priority-{{ task.priority|lower }}">{{ task.priority }}</span></td>
+                            <td><span class="badge status-badge">{{ task.status }}</span></td>
+                            <td>{{ task.sdlc_phase }}</td>
+                            <td>{{ task.due_date or "Not set" }}</td>
+                            <td class="small text-muted">{{ task.updated_at }}</td>
+                            <td class="text-end">
+                                <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                <form action="{{ url_for('delete_task', task_id=task.id) }}" method="post" class="d-inline" onsubmit="return confirm('Delete this task?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <h2 class="h4">No tasks yet</h2>
+            <p class="text-muted">Create a task for a feature, bug fix, document update, or test activity.</p>
+            <a href="{{ url_for('create_task') }}" class="btn btn-primary">Create Task</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

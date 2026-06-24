@@ -1,0 +1,102 @@
+:root {
+    --page-bg: #f4f7fb;
+    --panel-border: #dfe7f1;
+    --ink: #172033;
+    --muted: #667085;
+    --brand: #2563eb;
+}
+
+body {
+    background: var(--page-bg);
+    color: var(--ink);
+}
+
+.navbar {
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.12);
+}
+
+.panel,
+.metric-card {
+    background: #ffffff;
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    box-shadow: 0 12px 30px rgba(31, 41, 55, 0.06);
+}
+
+.panel {
+    padding: 1.25rem;
+}
+
+.metric-card {
+    padding: 1.25rem;
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.metric-card span {
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.metric-card strong {
+    color: var(--brand);
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+.phase-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #eef2f7;
+}
+
+.phase-row:last-child {
+    border-bottom: 0;
+}
+
+.status-badge {
+    background: #e8f0fe;
+    color: #1e40af;
+}
+
+.priority-low {
+    background: #e7f8ef;
+    color: #166534;
+}
+
+.priority-medium {
+    background: #fff4d6;
+    color: #92400e;
+}
+
+.priority-high {
+    background: #ffe4e6;
+    color: #be123c;
+}
+
+.task-form label {
+    font-weight: 600;
+}
+
+.empty-state {
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.table > :not(caption) > * > * {
+    padding: 1rem 0.75rem;
+}
+
+@media (max-width: 767px) {
+    .metric-card {
+        min-height: 105px;
+    }
+
+    .table {
+        min-width: 850px;
+    }
+}

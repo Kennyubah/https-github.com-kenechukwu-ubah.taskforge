@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h2 mb-1">{{ form_title }}</h1>
+        <p class="text-muted mb-0">Capture task details, progress, notes, and blockers.</p>
+    </div>
+    <a href="{{ url_for('tasks') }}" class="btn btn-outline-secondary">Back to Tasks</a>
+</div>
+
+<form method="post" class="panel task-form">
+    <div class="row g-3">
+        <div class="col-12">
+            <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ task.title }}" required>
+        </div>
+
+        <div class="col-12">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3">{{ task.description }}</textarea>
+        </div>
+
+        <div class="col-md-3">
+            <label for="priority" class="form-label">Priority</label>
+            <select class="form-select" id="priority" name="priority">
+                {% for priority in priorities %}
+                    <option value="{{ priority }}" {% if task.priority == priority %}selected{% endif %}>{{ priority }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label for="status" class="form-label">Status</label>
+            <select class="form-select" id="status" name="status">
+                {% for status in statuses %}
+                    <option value="{{ status }}" {% if task.status == status %}selected{% endif %}>{{ status }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label for="sdlc_phase" class="form-label">SDLC Phase</label>
+            <select class="form-select" id="sdlc_phase" name="sdlc_phase">
+                {% for phase in sdlc_phases %}
+                    <option value="{{ phase }}" {% if task.sdlc_phase == phase %}selected{% endif %}>{{ phase }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label for="due_date" class="form-label">Due Date</label>
+            <input type="date" class="form-control" id="due_date" name="due_date" value="{{ task.due_date }}">
+        </div>
+
+        <div class="col-md-6">
+            <label for="developer_notes" class="form-label">Developer Notes</label>
+            <textarea class="form-control" id="developer_notes" name="developer_notes" rows="4">{{ task.developer_notes }}</textarea>
+        </div>
+
+        <div class="col-md-6">
+            <label for="blocker_reason" class="form-label">Blocker Reason</label>
+            <textarea class="form-control" id="blocker_reason" name="blocker_reason" rows="4">{{ task.blocker_reason }}</textarea>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+        <a href="{{ url_for('tasks') }}" class="btn btn-outline-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Save Task</button>
+    </div>
+</form>
+{% endblock %}
